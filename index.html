@@ -3,17 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <title>Chúc mừng sinh nhật thầy</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#ffd6e0,#ffe5ec);
+    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* ===== PHONG THƯ ===== */
+.start{text-align:center; z-index:10}
+
+.envelope{
+    width:340px;
+    height:220px;
+    background:#ff8fab;
+    position:relative;
+    cursor:pointer;
+    box-shadow:0 20px 40px rgba(0,0,0,.3);
+}
+
+.flap{
+    position:absolute;
+    top:0;
+    width:100%;
+    height:110px;
+    background:#ff5d8f;
+    clip-path:polygon(0 0,100% 0,50% 100%);
+    transform-origin:top;
+    transition:1s;
+}
+
+.envelope.open .flap{transform:rotateX(180deg)}
+
+.open-text{
+    margin-top:20px;
+    font-size:22px;
+    font-weight:bold;
+    color:#7a003c;
+}
+
+/* ===== LÁ THƯ ===== */
+.letter{
+    display:none;
+    position:absolute;
+    background:white;
+    width:75%;
+    max-width:850px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 25px 50px rgba(0,0,0,.35);
+    z-index:5;
+    overflow:hidden;
+}
+
+.letter-decor{
+    position:absolute;
+    font-size:120px;
+    opacity:0.18;
+}
+.ld1{top:20px; left:30px}
+.ld2{bottom:30px; right:40px}
+.ld3{top:50%; left:50%; transform:translate(-50%,-50%)}
+
+.typing{
+    font-size:22px;
+    line-height:1.9;
+    white-space:pre-line;
+    min-height:240px;
+}
+
+/* ===== CHỮ KÝ ===== */
+.signature{
+    position:absolute;
+    bottom:25px;
+    right:35px;
+    font-size:20px;
+    font-style:italic;
+    color:#7a003c;
+}
+
+/* ===== TOÁN BAY ===== */
+.math{
+    position:absolute;
+    font-size:32px;
+    font-weight:900;
+    color:#4b0028;
+    white-space:nowrap;
+    text-shadow:0 0 14px rgba(255,255,255,.9);
+}
+
+/* ===== PHÁO HOA ===== */
+.firework{
+    position:absolute;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    animation:boom 2.2s forwards;
+}
+
+@keyframes boom{
+    to{
+        box-shadow:
+        180px -180px #ff004c,
+        -180px -180px #ffd500,
+        220px 90px #00eaff,
+        -220px 90px #9d00ff,
+        140px 220px #00ff6a,
+        -140px 220px #ff9f00;
+        opacity:0;
+    }
+}
+
+/* ===== ICON BAY ===== */
+.cake,.decor{
+    position:absolute;
+    font-size:48px;
+}
+
+/* ===== HƯỚNG BAY ===== */
+@keyframes fromLeft{from{transform:translateX(-120vw)}to{transform:translateX(120vw);opacity:0}}
+@keyframes fromRight{from{transform:translateX(120vw)}to{transform:translateX(-120vw);opacity:0}}
+@keyframes fromBottom{from{transform:translateY(120vh)}to{transform:translateY(-120vh);opacity:0}}
+@keyframes fromTop{from{transform:translateY(-120vh)}to{transform:translateY(120vh);opacity:0}}
+
+/* ===== ẢNH CUỐI + CHỮ SÁNG ===== */
+.final-box{
+    display:none;
+    position:absolute;
+    text-align:center;
+}
+
+.final-img{
+    max-width:70vw;
+    max-height:60vh;
+    animation:finalShow 3s ease forwards;
+}
+
+.final-text{
+    margin-top:20px;
+    font-size:30px;
+    font-weight:900;
+    color:#ff2e63;
+    text-align:center;
+
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #ffb703,
+        0 0 35px #ff006e,
+        0 0 60px #ff006e;
+
+    opacity:0;
+    animation:
+        textShow 2s ease forwards,
+        glow 1.6s ease-in-out infinite;
+
+    /* ⏳ CHỮ XUẤT HIỆN CHẬM HƠN ẢNH */
+    animation-delay: 3.2s, 5.2s;
+}
+
+
+@keyframes finalShow{
+    from{opacity:0;transform:scale(.8)}
+    to{opacity:1;transform:scale(1)}
+}
+
+@keyframes textShow{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes glow{
+    0%{text-shadow:0 0 10px #fff,0 0 20px #ffb703,0 0 35px #ff006e,0 0 60px #ff006e}
+    50%{text-shadow:0 0 16px #fff,0 0 35px #ffd60a,0 0 60px #ff006e,0 0 90px #ff006e}
+    100%{text-shadow:0 0 10px #fff,0 0 20px #ffb703,0 0 35px #ff006e,0 0 60px #ff006e}
+}
+</style>
 </head>
+
 <body>
 
 <audio id="music" src="happy.mp3"></audio>
 
 <div class="start" id="start">
-    <div class="envelope" onclick="openEnvelope()">
-        <div class="flap"></div>
-    </div>
-    <div class="open-text">Thầy mở thư đi</div>
+    <div class="envelope" onclick="openEnvelope()"><div class="flap"></div></div>
+    <div class="open-text">Thầy mở thư đi 😁</div>
 </div>
 
 <div class="letter" id="letter">
@@ -21,9 +202,13 @@
     <div class="letter-decor ld2">🎆</div>
     <div class="letter-decor ld3">🧸</div>
     <div class="typing" id="typing"></div>
+    <div class="signature">— Tập thể 9A5</div>
 </div>
 
-<img src="Be class.jpg" class="final-img" id="finalImg">
+<div class="final-box" id="finalBox">
+    <img src="Be class.jpg" class="final-img">
+    <div class="final-text">Lớp 9A5 mãi đỉnh!!! ✨🔥</div>
+</div>
 
 <script>
 const text=`Kính gửi thầy kính mến,
@@ -36,16 +221,11 @@ và tràn đầy nhiệt huyết.
 Chúc thầy mãi là người
 truyền cảm hứng
 và ánh sáng tri thức
-cho các thế hệ học trò.`;
+cho các thế hệ học trò.
+Và hơn hết kính chúc thầy 
+sớm có nữa kia cho mình 😁`;
 
-const mathList=[
-"x² + 2x + 1 = 0",
-"a² + b² = c²",
-"S = πr²",
-"∠A + ∠B + ∠C = 180°",
-"ΔABC cân tại A"
-];
-
+const mathList=["x² + 2x + 1 = 0","a² + b² = c²","S = πr²","∠A + ∠B + ∠C = 180°"];
 const cakes=["🎂","🍰","🧁"];
 const decors=["🎉","🎆","✨","🎈"];
 let i=0;
@@ -53,12 +233,10 @@ let i=0;
 function openEnvelope(){
     document.querySelector('.envelope').classList.add('open');
     music.play();
-
     setTimeout(()=>{
         start.style.display='none';
         letter.style.display='block';
         typeText();
-
         setInterval(spawnFirework,260);
         setInterval(spawnCake,420);
         setInterval(spawnDecor,520);
@@ -71,16 +249,15 @@ function typeText(){
         typing.innerHTML+=text.charAt(i++);
         setTimeout(typeText,55);
     }else{
-        setTimeout(showImage,3500);
+        setTimeout(()=>{letter.style.display='none';finalBox.style.display='block';},3500);
     }
 }
 
-function randomFly(el,duration){
-    const dirs=["fromLeft","fromRight","fromBottom","fromTop"];
-    const d=dirs[Math.floor(Math.random()*dirs.length)];
+function randomFly(el,d){
+    const a=["fromLeft","fromRight","fromBottom","fromTop"];
     el.style.left=Math.random()*innerWidth+'px';
     el.style.top=Math.random()*innerHeight+'px';
-    el.style.animation=`${d} ${duration}s linear forwards`;
+    el.style.animation=`${a[Math.floor(Math.random()*4)]} ${d}s linear forwards`;
 }
 
 function spawnMath(){
@@ -91,38 +268,9 @@ function spawnMath(){
     document.body.appendChild(m);
     setTimeout(()=>m.remove(),14000);
 }
-
-function spawnCake(){
-    const c=document.createElement('div');
-    c.className='cake';
-    c.innerText=cakes[Math.floor(Math.random()*cakes.length)];
-    randomFly(c,10);
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),10000);
-}
-
-function spawnDecor(){
-    const d=document.createElement('div');
-    d.className='decor';
-    d.innerText=decors[Math.floor(Math.random()*decors.length)];
-    randomFly(d,12);
-    document.body.appendChild(d);
-    setTimeout(()=>d.remove(),12000);
-}
-
-function spawnFirework(){
-    const f=document.createElement('div');
-    f.className='firework';
-    f.style.left=Math.random()*innerWidth+'px';
-    f.style.top=Math.random()*innerHeight+'px';
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),2200);
-}
-
-function showImage(){
-    letter.style.display='none';
-    finalImg.style.display='block';
-}
+function spawnCake(){const c=document.createElement('div');c.className='cake';c.innerText=cakes[Math.floor(Math.random()*3)];randomFly(c,10);document.body.appendChild(c);setTimeout(()=>c.remove(),10000)}
+function spawnDecor(){const d=document.createElement('div');d.className='decor';d.innerText=decors[Math.floor(Math.random()*4)];randomFly(d,12);document.body.appendChild(d);setTimeout(()=>d.remove(),12000)}
+function spawnFirework(){const f=document.createElement('div');f.className='firework';f.style.left=Math.random()*innerWidth+'px';f.style.top=Math.random()*innerHeight+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),2200)}
 </script>
 
 </body>
