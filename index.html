@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Bí mật</title>
-
+<link rel="stylesheet" href="style.css">
+<script src="javascript.js" defer></script>
 </head>
-
 <body>
 
 <audio id="music" src="happy.mp4"></audio>
@@ -27,69 +27,5 @@
     <img src="Be class.jpg" class="final-img">
     <div class="final-text">Lớp 9A5 mãi đỉnh!!! ✨🔥</div>
 </div>
-
-<script>
-const text=`Kính gửi thầy kính mến,
-
-Nhân ngày sinh nhật của thầy,
-chúng em kính chúc thầy
-luôn mạnh khỏe, hạnh phúc,
-và tràn đầy nhiệt huyết.
-
-Chúc thầy mãi là người
-truyền cảm hứng
-và ánh sáng tri thức
-cho các thế hệ học trò.
-Và hơn hết kính chúc thầy 
-sớm có nữa kia cho mình 😁`;
-
-const mathList=["x² + 2x + 1 = 0","a² + b² = c²","S = πr²","∠A + ∠B + ∠C = 180°"];
-const cakes=["🎂","🍰","🧁"];
-const decors=["🎉","🎆","✨","🎈"];
-let i=0;
-
-function openEnvelope(){
-    document.querySelector('.envelope').classList.add('open');
-    music.play();
-    setTimeout(()=>{
-        start.style.display='none';
-        letter.style.display='block';
-        typeText();
-        setInterval(spawnFirework,260);
-        setInterval(spawnCake,420);
-        setInterval(spawnDecor,520);
-        setInterval(spawnMath,900);
-    },1000);
-}
-
-function typeText(){
-    if(i<text.length){
-        typing.innerHTML+=text.charAt(i++);
-        setTimeout(typeText,55);
-    }else{
-        setTimeout(()=>{letter.style.display='none';finalBox.style.display='block';},3500);
-    }
-}
-
-function randomFly(el,d){
-    const a=["fromLeft","fromRight","fromBottom","fromTop"];
-    el.style.left=Math.random()*innerWidth+'px';
-    el.style.top=Math.random()*innerHeight+'px';
-    el.style.animation=`${a[Math.floor(Math.random()*4)]} ${d}s linear forwards`;
-}
-
-function spawnMath(){
-    const m=document.createElement('div');
-    m.className='math';
-    m.innerText=mathList[Math.floor(Math.random()*mathList.length)];
-    randomFly(m,14);
-    document.body.appendChild(m);
-    setTimeout(()=>m.remove(),14000);
-}
-function spawnCake(){const c=document.createElement('div');c.className='cake';c.innerText=cakes[Math.floor(Math.random()*3)];randomFly(c,10);document.body.appendChild(c);setTimeout(()=>c.remove(),10000)}
-function spawnDecor(){const d=document.createElement('div');d.className='decor';d.innerText=decors[Math.floor(Math.random()*4)];randomFly(d,12);document.body.appendChild(d);setTimeout(()=>d.remove(),12000)}
-function spawnFirework(){const f=document.createElement('div');f.className='firework';f.style.left=Math.random()*innerWidth+'px';f.style.top=Math.random()*innerHeight+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),2200)}
-</script>
-
 </body>
 </html>
